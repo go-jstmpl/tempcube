@@ -1,5 +1,9 @@
 package tempcube
 
 import (
-    _"testing"
+	"testing"
 )
+
+func TestInit(t *testing.T) {
+
+}
