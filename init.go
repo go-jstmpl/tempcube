@@ -50,7 +50,7 @@ func Init(p string) error {
 	fmt.Printf("--->  create %s\n", pt)
 
 	// sample/sample_helper.go
-	pt = fmt.Sprintf("%s/%s_helper.go")
+	pt = fmt.Sprintf("%s/%s_helper.go", p, p)
 	err = InitFile(pt, tmpl)
 	if err != nil {
 		return errors.Wrapf(err, "failed to create file %s", pt)

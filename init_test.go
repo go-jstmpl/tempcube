@@ -12,7 +12,7 @@ func TestInit(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	defer os.Remove(p)
+	defer os.RemoveAll(p)
 
 	// sample_project case init files
 	fs := []string{

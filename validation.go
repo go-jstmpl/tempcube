@@ -15,7 +15,7 @@ func Test(p, sc string) error {
 	if err != nil {
 		return errors.Wrap(err, "generating code")
 	}
-	defer os.Remove(pt)
+	defer os.RemoveAll(pt)
 
 	cmds := []string{
 		fmt.Sprintf("%s/%s.go", pt, p),

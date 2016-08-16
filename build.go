@@ -37,5 +37,6 @@ func Build(p, d, sc string) error {
 		return errors.Wrapf(err, "building code using go-jstempl, Out: %s", o)
 	}
 
+	fmt.Println("... Build succesd")
 	return nil
 }
