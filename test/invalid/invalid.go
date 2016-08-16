@@ -1,1 +1,5 @@
-package build
+package invalid
+
+func Invalid(){
+    {{.Title}}
+}
