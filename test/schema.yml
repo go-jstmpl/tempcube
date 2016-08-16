@@ -1,0 +1,33 @@
+
+title: test schema
+description: test schema
+
+definitions:
+    ok:
+        type: boolean
+        description: succeesed check
+        example: true 
+
+href: https://sample
+    
+links:
+    - title: OK
+      description: sample
+      rel: create
+      href: /ok
+      method: POST
+      schema:
+          type: object
+          properties:
+              ok:
+                  $ref: '#/definitions/ok'
+          required:
+              - ok   
+      targetSchema:
+          type: object
+          properties:
+              ok:
+                  $ref: '#/definitions/ok'
+          required:
+              - ok
+
