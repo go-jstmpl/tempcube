@@ -61,7 +61,7 @@ func CmdNew() *cli.App {
 				},
 				cli.StringFlag{
 					Name:  "schema, s",
-					Usage: "Source JSON Schema file.",
+					Usage: "Test case JSON Schema file.",
 				},
 			},
 		},
