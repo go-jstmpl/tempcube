@@ -3,9 +3,14 @@ package main
 import (
 	"log"
 	"os"
+	"tempcube"
 
-	_ "github.com/pkg/errors"
+	"github.com/pkg/errors"
 	"github.com/urfave/cli"
+)
+
+var (
+	ErrEmpty = errors.New("Argument empty")
 )
 
 func CmdNew() *cli.App {
@@ -21,7 +26,7 @@ func CmdNew() *cli.App {
 			Action: Init,
 			Flags: []cli.Flag{
 				cli.StringFlag{
-					Name:  "project name",
+					Name:  "project",
 					Usage: "Template project name you want to begin.",
 				},
 			},
@@ -66,14 +71,56 @@ func CmdNew() *cli.App {
 }
 
 func Init(c *cli.Context) error {
+	p := c.String("project")
+	if p == "" {
+		return errors.Wrap(ErrEmpty, "Project")
+	}
+	err := tempcube.Init(p)
+	if err != nil {
+		return errors.Wrap(err, "Init Operation")
+	}
+
 	return nil
 }
 
 func Build(c *cli.Context) error {
+	p := c.String("project")
+	if p == "" {
+		return errors.Wrap(ErrEmpty, "Project")
+	}
+
+	sc := c.String("schema")
+	if sc == "" {
+		return errors.Wrap(ErrEmpty, "Schema")
+	}
+
+	d := c.String("destination")
+	if d == "" {
+		return errors.Wrap(ErrEmpty, "Destionation")
+	}
+
+	err := tempcube.Build(p, d, sc)
+	if err != nil {
+		return errors.Wrap(err, "Build Operation")
+	}
 	return nil
 }
 
 func Test(c *cli.Context) error {
+	p := c.String("project")
+	if p == "" {
+		return errors.Wrap(ErrEmpty, "Project")
+	}
+
+	sc := c.String("schema")
+	if sc == "" {
+		return errors.Wrap(ErrEmpty, "Schema")
+	}
+
+	err := tempcube.Test(p, sc)
+	if err != nil {
+		return errors.Wrap(err, "Test Operation")
+	}
 	return nil
 }
 
