@@ -1,5 +1,5 @@
 package pass
 
-func Pass()string{
-    return "{{.Title}}"
+func Pass() string {
+	return "/*.Schema.Title */"
 }

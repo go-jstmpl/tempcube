@@ -26,7 +26,7 @@ func CmdNew() *cli.App {
 			Action: Init,
 			Flags: []cli.Flag{
 				cli.StringFlag{
-					Name:  "project",
+					Name:  "project, p",
 					Usage: "Template project name you want to begin.",
 				},
 			},
@@ -37,7 +37,7 @@ func CmdNew() *cli.App {
 			Action: Build,
 			Flags: []cli.Flag{
 				cli.StringFlag{
-					Name:  "project",
+					Name:  "project, p",
 					Usage: "Template project folder.",
 				},
 				cli.StringFlag{
@@ -53,10 +53,10 @@ func CmdNew() *cli.App {
 		{
 			Name:   "test",
 			Usage:  "testing validation and golang standard testing.",
-			Action: Test,
+			Action: Validate,
 			Flags: []cli.Flag{
 				cli.StringFlag{
-					Name:  "project",
+					Name:  "project, p",
 					Usage: "Template project folder.",
 				},
 				cli.StringFlag{
@@ -106,7 +106,7 @@ func Build(c *cli.Context) error {
 	return nil
 }
 
-func Test(c *cli.Context) error {
+func Validate(c *cli.Context) error {
 	p := c.String("project")
 	if p == "" {
 		return errors.Wrap(ErrEmpty, "Project")
@@ -117,7 +117,7 @@ func Test(c *cli.Context) error {
 		return errors.Wrap(ErrEmpty, "Schema")
 	}
 
-	err := tempcube.Test(p, sc)
+	err := tempcube.Validate(p, sc)
 	if err != nil {
 		return errors.Wrap(err, "Test Operation")
 	}

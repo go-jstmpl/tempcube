@@ -1,5 +1,3 @@
 package invalid
 
-func Invalid(){
-    {{.Title}}
-}
+/*.Schema.Title */

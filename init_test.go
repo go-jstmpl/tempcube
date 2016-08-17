@@ -1,7 +1,6 @@
 package tempcube
 
 import (
-	"fmt"
 	"os"
 	"testing"
 )
@@ -14,15 +13,7 @@ func TestInit(t *testing.T) {
 	}
 	defer os.RemoveAll(p)
 
-	// sample_project case init files
-	fs := []string{
-		fmt.Sprintf("%s/%s.go", p, p),
-		fmt.Sprintf("%s/%s_helper.go", p, p),
-		fmt.Sprintf("%s/%s_test.go", p, p),
-		fmt.Sprintf("%s/%s_helper_test.go", p, p),
-	}
-
-	for _, f := range fs {
+	for _, f := range PathList(p, p) {
 		_, err = os.Stat(f)
 		if err != nil {
 			t.Error(err)

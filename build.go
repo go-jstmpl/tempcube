@@ -3,6 +3,7 @@ package tempcube
 import (
 	"fmt"
 	"os/exec"
+	"sync"
 
 	"github.com/mattn/go-shellwords"
 	"github.com/pkg/errors"
@@ -22,17 +23,19 @@ func Command(cmd string) (string, error) {
 
 func Build(p, d, sc string) error {
 	var cmd string
+	var once = new(sync.Once)
 
-	// go get -u
-	cmd = fmt.Sprintf("go get -u github.com/minodisk/go-jstmpl/cmd/jstmpl")
-	o, err := Command(cmd)
-	if err != nil && o != "" {
-		return errors.Wrapf(err, "Getting go-jstmpl, Out: %s", o)
-	}
-
+	once.Do(func() {
+		// go get -u
+		cmd = fmt.Sprintf("go get -u github.com/minodisk/go-jstmpl/cmd/jstmpl")
+		o, err := Command(cmd)
+		if err != nil && o != "" {
+			fmt.Println(errors.Wrapf(err, "Getting go-jstmpl, Out: %s", o))
+		}
+	})
 	// jstmpl
 	cmd = fmt.Sprintf("jstmpl -s %s -t %s -o %s", sc, p, d)
-	o, err = Command(cmd)
+	o, err := Command(cmd)
 	if err != nil {
 		return errors.Wrapf(err, "building code using go-jstempl, Out: %s", o)
 	}
