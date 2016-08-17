@@ -1,4 +1,4 @@
-# Golang Template Code Generater and Testing Flamework
+# Template Generating and Testing Flamework using go-jstmpl
 
 tempcube is a go-jstmpl support framework to building and testing.
 that is Golang code generater from a JSON Schema setting file using the Golang text/template.  
